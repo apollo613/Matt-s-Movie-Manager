@@ -1,0 +1,21 @@
+<%- model_class = Movie -%>
+
+<div class="jumbotron">
+  <div class="container">
+    <div class="page-header">
+      <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+    </div>
+  </div>
+</div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/movies">Movies</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<%= render :partial => 'form' %>

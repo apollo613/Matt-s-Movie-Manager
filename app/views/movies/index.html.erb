@@ -1,0 +1,60 @@
+<%- model_class = Movie -%>
+<div class="jumbotron">
+  <div class="container">
+    <div class="page-header">
+      <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/movies">Movies</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= sortable "id"%></th>
+      <th><%= sortable "title"%></th>
+      <th><%= sortable "format"%></th>
+      <th><%= sortable "length"%></th>
+      <th><%= sortable "year"%></th>
+      <th><%= sortable "rating"%></th>
+      <th><%= sortable "created_at"%></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= link_to movie.id, movie_path(movie) %></td>
+        <td><%= movie.title %></td>
+        <td><%= movie.format %></td>
+        <td><%= (movie.length / 60).to_s + " hr " + (movie.length % 60).to_s + " min" %></td>
+        <td><%= movie.year %></td>
+        <td><%= movie.rating %></td>
+        <td><%=l movie.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_movie_path(movie), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      movie_path(movie),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_movie_path,
+            :class => 'btn btn-primary' %>

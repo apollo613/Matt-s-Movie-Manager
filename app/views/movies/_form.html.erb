@@ -1,0 +1,123 @@
+<!-- <%= form_for @movie, :html => { :class => "form-horizontal movie" } do |f| %>
+
+    <% if @movie.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @movie.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%= error_span(@movie[:title]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :format, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :format, :class => 'form-control' %>
+    </div>
+    <%= error_span(@movie[:format]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :length, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :length, :class => 'form-control' %>
+    </div>
+    <%= error_span(@movie[:length]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :year, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :year, :class => 'form-control' %>
+    </div>
+    <%= error_span(@movie[:year]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :rating, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :rating, :class => 'form-control' %>
+    </div>
+    <%= error_span(@movie[:rating]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            movies_path, :class => 'btn btn-default' %>
+
+<% end %>
+ -->
+
+<div class="container">
+  <%= form_for(@movie) do |f| %>
+    <% if @movie.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+        <ul>
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <select name="movie[format]" id="movie_format" class="form-control">
+        <option value="DVD">DVD</option>
+        <option value="VHS">VHS</option>
+        <option value="STREAMING">Streaming</option>
+      </select>
+<!--       <%= f.label :format %><br>
+      <%= f.text_field :format %> -->
+    </div>
+  <div class="control-group">
+    <%= f.label :length, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :length, :class => 'form-control' %>
+    </div>
+    <%= error_span(@movie[:length]) %>
+  </div>
+    <div class="field">
+      <%= f.label :year %><br>
+      <%= f.number_field :year %>
+    </div>
+    <div class="field">
+      <div class="radio">
+        <label><input type="radio" name="movie[rating]" value="01">1</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="movie[rating]" value="02">2</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="movie[rating]" value="03">3</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="movie[rating]" value="04">4</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="movie[rating]" value="05">5</label>
+      </div>
+<!--       <%= f.label :rating %><br>
+      <%= f.number_field :rating %> -->
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
